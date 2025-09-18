@@ -6,7 +6,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/FC4RICA/Go-Scaffolder/internal/scaffold"
+	"github.com/FC4RICA/Go-Scaffolder/internal/project"
 	"github.com/spf13/cobra"
 )
 
@@ -18,7 +18,7 @@ var newCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		projectName := args[0]
 
-		if err := scaffold.CreateProject(projectName); err != nil {
+		if err := project.CreateProject(projectName); err != nil {
 			return fmt.Errorf("failed to create project %s: %w", projectName, err)
 		}
 
