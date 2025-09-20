@@ -13,7 +13,3 @@ var versionCmd = &cobra.Command{
 		fmt.Println("Go Scaffolder Generator v0.0.1")
 	},
 }
-
-func init() {
-	rootCmd.AddCommand(versionCmd)
-}

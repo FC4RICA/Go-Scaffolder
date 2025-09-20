@@ -1,9 +1,11 @@
 package project
 
-func CreateProject(name string) error {
+import "path/filepath"
+
+func CreateProject(name string, path string) error {
 	cfg := Config{
 		ProjectName: name,
-		Path:        "./" + name,
+		Path:        filepath.Join(path, name),
 		Dirs: []string{
 			"cmd",
 			"pkg",

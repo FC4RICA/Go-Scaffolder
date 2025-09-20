@@ -11,22 +11,30 @@ import (
 )
 
 // newCmd represents the new command
-var newCmd = &cobra.Command{
-	Use:   "new [name]",
-	Short: "Create an empty project",
-	Args:  cobra.MinimumNArgs(1),
-	RunE: func(cmd *cobra.Command, args []string) error {
-		projectName := args[0]
+var (
+	projectPath string
 
-		if err := project.CreateProject(projectName); err != nil {
-			return fmt.Errorf("failed to create project %s: %w", projectName, err)
-		}
+	newCmd = &cobra.Command{
+		Use:   "new [name]",
+		Short: "Create an empty project",
+		Args:  cobra.MinimumNArgs(1),
+		RunE: func(cmd *cobra.Command, args []string) error {
+			projectName := args[0]
 
-		fmt.Printf("project %s created successfully\n", projectName)
-		return nil
-	},
-}
+			if projectPath == "" {
+				projectPath = "."
+			}
+
+			if err := project.CreateProject(projectName, projectPath); err != nil {
+				return fmt.Errorf("failed to create project %s: %w", projectName, err)
+			}
+
+			fmt.Printf("project %s created successfully\n", projectName)
+			return nil
+		},
+	}
+)
 
 func init() {
-	rootCmd.AddCommand(newCmd)
+	newCmd.Flags().StringVarP(&projectPath, "path", "p", ".", "Path to create the project in")
 }
