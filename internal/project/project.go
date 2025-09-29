@@ -14,8 +14,8 @@ func CreateProject(name string, path string) error {
 			"internal/adapter/middleware",
 			"internal/adapter/router",
 			"internal/domain",
-			"internal/interface",
-			"internal/usecase",
+			"internal/port",
+			"internal/service",
 		},
 	}
 
